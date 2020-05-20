@@ -1,0 +1,16 @@
+body {
+    font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
+    font-size: 100%;            
+}
+
+h1 {
+    display: inline-block;
+}
+
+#settings {
+    background-image: url('settings.png');
+    background-size: 30px 30px;
+    margin: 1 0;
+    width: 30px;
+    height: 30px;
+}
