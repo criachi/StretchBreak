@@ -7,18 +7,19 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         console.log("reuqest start timer");
         timerTime = request.time;
         timeRemaining = timerTime;
+        
         if(timerTime > 0) {
             timerID = setInterval(() => {
                 timeRemaining--;
+                console.log("time remaining calculated " + timeRemaining);
+                // update extension popup with new time remaining
+                chrome.runtime.sendMessage({ cmd: 'TIME_UPDATE', timeLeft: timeRemaining});
                 if(timeRemaining == 0) {
                     chrome.tabs.create({url: "alert.html"});
                     clearInterval(timerID);
                 }
             }, 1000) // keep track of timer in the background
         } 
-    } else if (request.cmd === 'GET_TIME') {
-        sendResponse({ timeRemaining: timeRemaining });
-    }
-}
-    
+    } 
+}    
 )

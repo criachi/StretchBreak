@@ -1,40 +1,28 @@
-function updateTimer(timeRemaining) {
-    console.log("update timer");
-    while(timeRemaining > 0) {
-        setTimeout( () => {
+// receive time remaining from background script and update the timer html
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+    if(request.cmd === 'TIME_UPDATE') {
+        let timeRemaining = request.timeLeft;
         let hours = Math.floor(timeRemaining / 3600);
         let minutes = Math.floor((timeRemaining % 3600) / 60);
         let seconds = Math.floor(timeRemaining % 60); // remainder will alrdy have units of seconds 
-        console.log(seconds);
-        document.getElementById('timeDisplay').innerHTML = hours + ":" + minutes + ":" + seconds;
-        }, 1000);
-        timeRemaining--;
-    }     
-    document.getElementById('startTimer').style.visibility = 'visible'; // make start timer btn visible agn 
-}
-
-// need to call start Timer on click of start timer button too 
+        // add a leading '0' if the values are less than 10
+        let displayHours = (hours < 10) ? '0' + hours : hours;
+        let displayMinutes = (minutes < 10) ? '0' + minutes : minutes;
+        let displaySeconds = (seconds < 10) ? '0' + seconds : seconds;
+        document.getElementById('timeDisplay').innerHTML = displayHours + ":" + displayMinutes + ":" + displaySeconds;
+        if(timeRemaining == 0) {
+            document.getElementById('startTimer').style.visibility = 'visible';
+        }
+    }    
+});
 
 function startTimer(duration) { // duration will be in seconds 
     if(duration > 0) {
     // message passing: sending request from popup script to extension
         chrome.runtime.sendMessage({ cmd: 'START_TIMER', time: duration });
-            // setInterval(() => {
-            //     duration--;
-            //     let hours = Math.floor(duration / 3600);
-            //     let minutes = Math.floor((duration % 3600) / 60);
-            //     let seconds = Math.floor(duration % 60); // remainder will alrdy have units of seconds 
-            //     document.getElementById('timerDisplay').innerHTML = hours + ":" + minutes + ":" + seconds; // update timer html every 1 second
-            // }, 1000)
-        updateTimer(duration);
     }
 }
+
 document.addEventListener('DOMContentLoaded', function () {
-    chrome.runtime.sendMessage({ cmd: 'GET_TIME'}, response => {
-        if(response.time) {
-            let timeRemaining = response.time;
-            updateTimer(timeRemaining) 
-        }
-    })
-    document.getElementById('startTimer').addEventListener('click', function() { startTimer(10); document.getElementById('startTimer').style.visibility = 'hidden'; }); // 5 seconds default for now 
+    document.getElementById('startTimer').addEventListener('click', function() { startTimer(30); document.getElementById('startTimer').style.visibility = 'hidden'; });  
 });
