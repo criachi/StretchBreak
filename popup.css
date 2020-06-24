@@ -1,6 +1,5 @@
 #extension {
     font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
-    font-size: 60%;  
     display: grid;
     grid-template-columns: 300px;          
 }
@@ -16,6 +15,7 @@
 }
 
 #mainHeader {
+    font-size: 60%;
     grid-row: 1;
     grid-column: 1;
 }
@@ -49,6 +49,6 @@ span {
     height: 30px;
 }
 
-input[type="text"] {
-    width: 20px;
+input[type="number"] {
+    width: 30px;
 }    

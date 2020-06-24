@@ -20,16 +20,33 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
 function startTimer(duration) { // duration will be in seconds 
     if(duration > 0) {
-    // message passing: sending request from popup script to extension
+    // message passing: sending request from popup script to background page to start the timer
         chrome.runtime.sendMessage({ cmd: 'START_TIMER', time: duration });
     }
 }
 
 document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('settingsPage').style.visibility = 'hidden';
-    document.getElementById('startTimer').addEventListener('click', function() { startTimer(10); document.getElementById('startTimer').style.visibility = 'hidden'; });  
+    document.getElementById('startTimer').addEventListener('click', function() { chrome.storage.sync.get(['workSprintHours', 'workSprintMins'], function(result) {
+        // bugs
+        console.log(result);
+        console.log(result.workSprintMins);
+        let duration = (result.workSprintHours*3600) + (result.workSprintMins*60);
+        console.log(duration); // prints NaN
+        startTimer(duration);
+    }); document.getElementById('startTimer').style.visibility = 'hidden'; });  
     document.getElementById('settings').addEventListener('click', function() { document.getElementById('mainPage').style.visibility = 'hidden'; document.getElementById('settingsPage').style.visibility = 'visible';});
     document.getElementById('home').addEventListener('click', function() { document.getElementById('settingsPage').style.visibility = 'hidden'; document.getElementById('mainPage').style.visibility = 'visible';});
+    // if i add an if statement here to only execute these below statements when settingsPage elements are set to visible, I get a bug where upon browser Action, both divs are displayed on top of each other
+    chrome.storage.sync.get({ workSprintHours: '1', workSprintMinutes: '0', stretchBreakHours: '0', stretchBreakMinutes: '10' }, function(data) {
+        chrome.storage.sync.set(data);
+        document.getElementById('WorkSprintHours').value = (data.workSprintHours < 10) ? '0' + data.workSprintHours : data.workSprintHours;
+        document.getElementById('WorkSprintMins').value = (data.workSprintMinutes < 10) ? '0' + data.workSprintMinutes : data.workSprintMinutes;
+        document.getElementById('StretchBreakHours').value = (data.stretchBreakHours < 10) ? '0' + data.stretchBreakHours : data.stretchBreakHours;
+        document.getElementById('StretchBreakMins').value = (data.stretchBreakMinutes < 10) ? '0' + data.stretchBreakMinutes : data.stretchBreakMinutes ;
+    })
+    document.getElementById('setWorkSprint').addEventListener('click', function() { chrome.storage.sync.set({ workSprintHours: document.getElementById('WorkSprintHours').value, workSprintMinutes: document.getElementById('WorkSprintMins').value })})
+    document.getElementById('setStretchBreak').addEventListener('click', function() { chrome.storage.sync.set({ stretchBreaktHours: document.getElementById('StretchBreakHours').value, stretchBreakMinutes: document.getElementById('StretchBreakMins').value })})
 });
 
 
