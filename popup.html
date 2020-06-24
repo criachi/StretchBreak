@@ -4,19 +4,41 @@
     <head>
         <meta charset="utf-8">
         <title>StretchBreak</title>
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="popupStyle.css">
         <!-- there has to be a script injected here to be able to set and manage alarms and stuff and countdown-->
     </head>
-    <body>
-        <header> 
-            <h1>StretchBreak</h1>
-            <button type=button id="settings"></button>
-        </header>
-        <div> 
-            <span id="timeDisplay">00:00:00</span>
-            <button type=button id="startTimer">Start Timer</button>
-            <script src="popup.js"></script>
-            <script src="background.js"></script>
+    <body id="extension">
+        <div id="mainPage">
+            <header id="mainHeader"> 
+                <h1>StretchBreak</h1>
+                <button type=button id="settings"></button>
+            </header>
+            <div id="mainDiv"> 
+                <span id="timeDisplay">00:00:00</span>
+                <button type=button id="startTimer">Start Timer</button>
+                <script src="popup.js"></script>
+                <script src="background.js"></script>
+            </div>
+        </div>
+        
+        <div id="settingsPage"> 
+            <header> 
+                <h1>Settings</h1>
+                <button type=button id="home"></button>
+            </header>
+            <div> 
+                <h2>Work Sprint Duration</h2>
+                <input type="text" name="hours">
+                <span>:</span>
+                <input type="text" name="minutes">
+                <button type=button id="setWorkSprint">Set</button>
+                <h2>Stretch Break Duration</h2>
+                <input type="text" name="hours">
+                <span>:</span>
+                <input type="text" name="minutes">
+                <button type=button id="setStretchBreak">Set</button>
+                
+            </div>
         </div>
     </body>
 </html>

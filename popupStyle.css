@@ -1,0 +1,54 @@
+#extension {
+    font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
+    font-size: 60%;  
+    display: grid;
+    grid-template-columns: 300px;          
+}
+
+#mainPage, #settingsPage {
+    grid-row: 1;
+    grid-column: 1;
+}
+
+#mainPage {
+    display: grid;
+    grid-template-columns: 200px 200px 200px; 
+}
+
+#mainHeader {
+    grid-row: 1;
+    grid-column: 1;
+}
+
+#mainDiv {
+    grid-row: 2;
+    grid-column: 1;
+} 
+
+h1 {
+    display: inline-block;
+}
+
+span {
+    margin: 0 0 0 0;
+}
+
+#settings {
+    background-image: url('settings_google_icon.png');
+    background-size: 30px 30px;
+    margin: 0 0 0 0;
+    width: 30px;
+    height: 30px;
+}
+
+#home {
+    background-image: url('home_google_icon.png');
+    background-size: 30px 30px;
+    margin: 1 0;
+    width: 30px;
+    height: 30px;
+}
+
+input[type="text"] {
+    width: 20px;
+}    

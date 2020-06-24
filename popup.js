@@ -12,6 +12,8 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         document.getElementById('timeDisplay').innerHTML = displayHours + ":" + displayMinutes + ":" + displaySeconds;
         if(timeRemaining == 0) {
             document.getElementById('startTimer').style.visibility = 'visible';
+        } else {
+            document.getElementById('startTimer').style.visibility = 'hidden';
         }
     }    
 });
@@ -24,5 +26,11 @@ function startTimer(duration) { // duration will be in seconds
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-    document.getElementById('startTimer').addEventListener('click', function() { startTimer(30); document.getElementById('startTimer').style.visibility = 'hidden'; });  
+    document.getElementById('settingsPage').style.visibility = 'hidden';
+    document.getElementById('startTimer').addEventListener('click', function() { startTimer(10); document.getElementById('startTimer').style.visibility = 'hidden'; });  
+    document.getElementById('settings').addEventListener('click', function() { document.getElementById('mainPage').style.visibility = 'hidden'; document.getElementById('settingsPage').style.visibility = 'visible';});
+    document.getElementById('home').addEventListener('click', function() { document.getElementById('settingsPage').style.visibility = 'hidden'; document.getElementById('mainPage').style.visibility = 'visible';});
 });
+
+
+
