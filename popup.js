@@ -28,13 +28,7 @@ function startTimer(duration) { // duration will be in seconds
 document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('settingsPage').style.visibility = 'hidden';
     document.getElementById('startTimer').addEventListener('click', function() { chrome.storage.sync.get(['workSprintHours', 'workSprintMinutes'], function(result) {
-        // bugs
-        console.log("clicked start timer");
-        console.log(result);
-        console.log(result.workSprintMinutes);
         let duration = (result.workSprintHours*3600) + (result.workSprintMinutes*60);
-        console.log("printing derived duration");
-        console.log(duration); // prints NaN
         startTimer(duration);
     }); document.getElementById('startTimer').style.visibility = 'hidden'; });  
     document.getElementById('settings').addEventListener('click', function() { document.getElementById('mainPage').style.visibility = 'hidden'; document.getElementById('settingsPage').style.visibility = 'visible';});
@@ -42,11 +36,6 @@ document.addEventListener('DOMContentLoaded', function () {
     // if i add an if statement here to only execute these below statements when settingsPage elements are set to visible, I get a bug where upon browser Action, both divs are displayed on top of each other
     chrome.storage.sync.get({ workSprintHours: '1', workSprintMinutes: '0', stretchBreakHours: '0', stretchBreakMinutes: '10' }, function(data) {
         chrome.storage.sync.set(data);
-        console.log("printing worksprinthours and mins from sync.get");
-        console.log(data.workSprintHours);
-        console.log(data.workSprintMinutes);
-        console.log(data.stretchBreakHours);
-        console.log(data.stretchBreakMinutes);
         document.getElementById('WorkSprintHours').value = (data.workSprintHours < 10) ? '0' + data.workSprintHours : data.workSprintHours;
         document.getElementById('WorkSprintMins').value = (data.workSprintMinutes < 10) ? '0' + data.workSprintMinutes : data.workSprintMinutes;
         document.getElementById('StretchBreakHours').value = (data.stretchBreakHours < 10) ? '0' + data.stretchBreakHours : data.stretchBreakHours;
