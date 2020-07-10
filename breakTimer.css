@@ -1,0 +1,28 @@
+body {
+    text-align: center;
+    background-color: #00ECB9;
+    font-family: sans-serif; 
+    font-weight: 100; 
+}
+h1 { 
+    color: #396; 
+    font-weight: 100; 
+    font-size: 40px; 
+    margin: 40px 0px 20px; 
+} 
+#breakDiv { 
+    font-family: sans-serif; 
+    color: #ffff; 
+    display: inline-block; 
+    font-weight: 100; 
+    text-align: center; 
+    font-size: 30px; 
+} 
+#startBreakTimer {
+    color: #ffff;
+    background-color:#00BF96;
+	border-radius:10px;
+    border:1px solid #03b992;
+    width: 100px;
+    height: 30px;
+}

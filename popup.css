@@ -1,4 +1,6 @@
 #extension {
+    text-align: center;
+    background: #00ECB9;
     font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
     display: grid;
     grid-template-columns: 300px;          
@@ -15,6 +17,7 @@
 }
 
 #mainHeader {
+    color: #396; 
     font-size: 60%;
     grid-row: 1;
     grid-column: 1;
@@ -29,6 +32,10 @@ h1 {
     display: inline-block;
 }
 
+h2 {
+    color: #396; 
+}
+
 span {
     margin: 0 0 0 0;
 }
@@ -39,6 +46,10 @@ span {
     margin: 0 0 0 0;
     width: 30px;
     height: 30px;
+}
+
+#settingsHeader {
+    color: #396; 
 }
 
 #home {
@@ -52,3 +63,21 @@ span {
 input[type="number"] {
     width: 30px;
 }    
+
+#startTimer {
+    color: #ffff;
+    background-color:#00BF96;
+	border-radius:10px;
+    border:1px solid #03b992;
+    width: 100px;
+    height: 30px;
+}
+
+#set {
+    color: #ffff;
+    background-color:#00BF96;
+	border-radius:10px;
+    border:1px solid #03b992;
+    width: 50px;
+    height: 30px;
+}
