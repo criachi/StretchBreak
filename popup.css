@@ -64,7 +64,7 @@ input[type="number"] {
     width: 30px;
 }    
 
-#startTimer {
+#startTimer, #stopTimer {
     color: #ffff;
     background-color:#00BF96;
 	border-radius:10px;

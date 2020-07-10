@@ -15,7 +15,11 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         } else {
             document.getElementById('startTimer').style.visibility = 'hidden';
         }
-    }    
+    } else if(request.cmd === 'TIME_RESET') {
+        document.getElementById('timeDisplay').innerHTML = "00:00:00";
+        document.getElementById('startTimer').style.visibility = 'visible';
+        document.getElementById('stopTimer').style.visibility = 'hidden';
+    }
 });
 
 function startTimer(duration) { // duration will be in seconds 
@@ -26,11 +30,27 @@ function startTimer(duration) { // duration will be in seconds
 }
 
 document.addEventListener('DOMContentLoaded', function () {
+    chrome.storage.sync.get(['startPressed'], function(result) {
+        console.log(result.startPressed);
+        if(result.startPressed) {
+            document.getElementById('startTimer').style.visibility = 'hidden';
+            document.getElementById('stopTimer').style.visibility = 'visible';
+        } else {
+            document.getElementById('startTimer').style.visibility = 'visible';
+            document.getElementById('stopTimer').style.visibility = 'hidden';
+        }
+    });
     document.getElementById('settingsPage').style.visibility = 'hidden';
     document.getElementById('startTimer').addEventListener('click', function() { chrome.storage.sync.get(['workSprintHours', 'workSprintMinutes'], function(result) {
+        chrome.storage.sync.set({ startPressed: true, stopPressed: false });
+        document.getElementById('startTimer').style.visibility = 'hidden';
+        document.getElementById('stopTimer').style.visibility = 'visible';
         let duration = (result.workSprintHours*3600) + (result.workSprintMinutes*60);
         startTimer(duration);
-    }); document.getElementById('startTimer').style.visibility = 'hidden'; });  
+    }); document.getElementById('startTimer').style.visibility = 'hidden'; }); 
+    document.getElementById('stopTimer').addEventListener('click', function() { 
+        chrome.storage.sync.set({ startPressed: false, stopPressed: true });
+    });    
     document.getElementById('settings').addEventListener('click', function() { document.getElementById('mainPage').style.visibility = 'hidden'; document.getElementById('settingsPage').style.visibility = 'visible';});
     document.getElementById('home').addEventListener('click', function() { document.getElementById('settingsPage').style.visibility = 'hidden'; document.getElementById('mainPage').style.visibility = 'visible';});
     // if i add an if statement here to only execute these below statements when settingsPage elements are set to visible, I get a bug where upon browser Action, both divs are displayed on top of each other
@@ -41,8 +61,17 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('StretchBreakHours').value = (data.stretchBreakHours < 10) ? '0' + data.stretchBreakHours : data.stretchBreakHours;
         document.getElementById('StretchBreakMins').value = (data.stretchBreakMinutes < 10) ? '0' + data.stretchBreakMinutes : data.stretchBreakMinutes ;
     })
-    document.getElementById('setWorkSprint').addEventListener('click', function() { chrome.storage.sync.set({ workSprintHours: document.getElementById('WorkSprintHours').value, workSprintMinutes: document.getElementById('WorkSprintMins').value })})
-    document.getElementById('setStretchBreak').addEventListener('click', function() { chrome.storage.sync.set({ stretchBreaktHours: document.getElementById('StretchBreakHours').value, stretchBreakMinutes: document.getElementById('StretchBreakMins').value })})
+
+    setWorkSprint = document.getElementById('setWorkSprint');
+    if(setWorkSprint) {
+        setWorkSprint.addEventListener('click', function() { chrome.storage.sync.set({ workSprintHours: document.getElementById('WorkSprintHours').value, workSprintMinutes: document.getElementById('WorkSprintMins').value })})
+    }
+
+    setStretchBreak = document.getElementById('setStretchBreak');
+    if(setStretchBreak) {
+        setStretchBreak.addEventListener('click', function() { chrome.storage.sync.set({ stretchBreaktHours: document.getElementById('StretchBreakHours').value, stretchBreakMinutes: document.getElementById('StretchBreakMins').value })})
+    }
+    
 });
 
 
