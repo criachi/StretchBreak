@@ -9,3 +9,6 @@ Necessary functionality to add:
 
 Fixes to be made: 
 - Cleaning up UI 
+
+Additional Features to add: 
+- Suggesting youtube stretching videos and allowing the user to specify a list of preferred youtube videos on hand
