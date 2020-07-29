@@ -1,46 +1,73 @@
 <!DOCTYPE html>
 
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>StretchBreak</title>
-        <link rel="stylesheet" href="popup.css">
-    </head>
-    <body id="extension">
-        <div id="mainPage">
-            <header id="mainHeader"> 
-                <h1>StretchBreak</h1>
-                <button type=button id="settings"></button>
-            </header>
-            <div id="mainDiv"> 
-                <span id="timeDisplay">00:00:00</span>
-                <button type=button id="startTimer">Start Timer</button>
-                <button type=button id="stopTimer">Stop Timer</button>
-            </div>
-        </div>
-        
-        <div id="settingsPage"> 
-            <header id="settingsHeader"> 
-                <h1>Settings</h1>
-                <button type=button id="home"></button>
-            </header>
-            <div> 
-                <h2>Work Sprint Duration</h2>
-                <input id="WorkSprintHours" type="number" min="0" max="12" step="1" name="hours">
-                <span>hrs :</span>
-                <input id="WorkSprintMins" type="number" min="0" max="59" step="1" name="minutes">
-                <span>mins</span>
-                <button type=button id="set">Set</button>
-                <h2>Stretch Break Duration</h2>
-                <input id="StretchBreakHours" type="number" min="0" max="12" step="1" name="hours">
-                <span>hrs :</span>
-                <input id="StretchBreakMins" type="number" min="0" max="59" step="1" name="minutes">
-                <span>mins</span>
-                <button type=button id="set">Set</button>
-                
-            </div>
-        </div>
-        <script src="popup.js"></script>
-        <script src="background.js"></script>
-    </body>
+  <head>
+    <meta charset="utf-8" />
+    <title>StretchBreak</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body id="extension">
+    <div id="mainPage">
+      <header id="mainHeader">
+        <h1>StretchBreak</h1>
+        <button type="button" class="btn" id="settings"></button>
+      </header>
+      <div id="mainDiv">
+        <span id="timeDisplay">00:00:00</span>
+        <button type="button" class="btn" id="startTimer">Start Timer</button>
+        <button type="button" class="btn" id="stopTimer">Stop Timer</button>
+      </div>
+    </div>
+
+    <div id="settingsPage">
+      <header id="settingsHeader">
+        <h1>Settings</h1>
+        <button type="button" class="btn" id="home"></button>
+      </header>
+      <div>
+        <h2>Work Sprint Duration</h2>
+        <input
+          id="WorkSprintHours"
+          type="number"
+          min="0"
+          max="12"
+          step="1"
+          name="hours"
+        />
+        <span>hrs :</span>
+        <input
+          id="WorkSprintMins"
+          type="number"
+          min="0"
+          max="59"
+          step="1"
+          name="minutes"
+        />
+        <span>mins</span>
+        <button type="button" class="btn" id="set">Set</button>
+        <h2>Stretch Break Duration</h2>
+        <input
+          id="StretchBreakHours"
+          type="number"
+          min="0"
+          max="12"
+          step="1"
+          name="hours"
+        />
+        <span>hrs :</span>
+        <input
+          id="StretchBreakMins"
+          type="number"
+          min="0"
+          max="59"
+          step="1"
+          name="minutes"
+        />
+        <span>mins</span>
+        <button type="button" class="btn" id="set">Set</button>
+      </div>
+    </div>
+    <script src="popup.js"></script>
+    <script src="background.js"></script>
+  </body>
 </html>

@@ -43,9 +43,15 @@ span {
   margin: 0 0 0 0;
 }
 
+.btn {
+  background-color: #00bf96;
+  border: 1px solid #03b992;
+}
+
 #settings {
   background-image: url("settings_google_icon.png");
   background-size: 30px 30px;
+  background-position: center;
   margin: 0 0 0 0;
   width: 30px;
   height: 30px;
@@ -58,6 +64,7 @@ span {
 #home {
   background-image: url("home_google_icon.png");
   background-size: 30px 30px;
+  background-position: center;
   margin: 1 0;
   width: 30px;
   height: 30px;
@@ -70,9 +77,7 @@ input[type="number"] {
 #startTimer,
 #stopTimer {
   color: #ffff;
-  background-color: #00bf96;
   border-radius: 10px;
-  border: 1px solid #03b992;
   width: 100px;
   height: 30px;
 }
