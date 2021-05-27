@@ -112,7 +112,7 @@ document.addEventListener("DOMContentLoaded", function () {
       chrome.storage.sync.set({
         stretchBreaktHours: document.getElementById("StretchBreakHours").value,
         stretchBreakMinutes: document.getElementById("StretchBreakMins").value,
-      });
+      }, );
     });
   }
 });
